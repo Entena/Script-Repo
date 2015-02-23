@@ -1,0 +1,19 @@
+#!/bin/bash
+#This script assumes you have installed geoip and it's databases.
+#If you have not please install geoiplookup
+if [ $# -eq 0 ]
+   then
+     echo "No arguments supplied, need ip or file containing line seperated ips"
+     exit
+fi
+
+FILENAME=$1
+if [ -e $FILENAME ]; then
+   while read line
+      do
+         echo "Checking for $line"
+         geoiplookup $line
+      done < $FILENAME
+else
+   geoiplookup $1
+fi
