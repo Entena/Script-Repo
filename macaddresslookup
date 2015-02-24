@@ -1,0 +1,18 @@
+#!/bin/bash
+#Stole this from online great little tool to search for who's mac addy this is
+#then display basic vendor information
+
+if [ $# -eq 0 ]
+   then
+   echo "No arguments supplied, need a mac address"
+   exit
+fi
+
+
+OUI=$(echo ${1//[:.- ]/} | tr "[a-f]" "[A-F]" | egrep -o "^[0-9A-F]{6}")
+if [ ! -f oui.txt ] 
+   then
+   wget http://standards.ieee.org/regauth/oui/oui.txt
+fi
+
+grep $OUI oui.txt
