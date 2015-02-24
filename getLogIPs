@@ -1,0 +1,11 @@
+#!/bin/bash
+#This script will pull IPs attempting to connect from a UFW log and then strip
+#the leading text leaving only IPs. Odds are you might need to run this with
+#sudo, right now it will only pull ipv4 ips
+if [ $# -eq 0 ]
+   then
+   echo "No arguments supplied, need a path to the ufw.log"
+   exit
+fi
+
+grep -o "SRC=[0-9]*.[0-9]*.[0-9]*.[0-9]*" $1 | sed 's/SRC\=//'
