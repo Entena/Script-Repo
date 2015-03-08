@@ -1,0 +1,21 @@
+#!/bin/bash
+#bash script to replay tty logs from kippo. It also 
+#colorizes them for easy viewing
+
+for file in ./tty/*.log
+do
+	num=`shuf -i 1-7 -n 1`
+	if [ -z "$numold" ]
+	then
+		echo ""
+	else 
+		while [ $num = $numold ]
+		do
+			num=`shuf -i 1-7 -n 1`
+		done
+	fi
+	echo  "$(tput setaf $num)$file"
+	../utils/playlog.py $file
+	echo -e "\n$(tput sgr0)"
+	numold=$num
+done
