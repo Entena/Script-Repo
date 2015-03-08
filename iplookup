@@ -11,9 +11,15 @@ FILENAME=$1
 if [ -e $FILENAME ]; then
    while read line
       do
+#         num=`shuf -i 1-7 -n 1`
+#         echo "$(tput setaf $num)Checking for $line"
          echo "Checking for $line"
          geoiplookup $line
+         curl ipinfo.io/$line
+         echo -e "\n"
+#         echo -e "\n$(tput sgr0)"
       done < $FILENAME
 else
    geoiplookup $1
+   curl ipinfo.io/$1
 fi
