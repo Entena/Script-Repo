@@ -1,8 +1,14 @@
 #!/bin/bash
 #bash script to replay tty logs from kippo. It also 
 #colorizes them for easy viewing
+if [ $# -eq 0 ]
+    then
+	echo "No arguments supplied give path to dir containing logs"
+	exit
+fi
 
-for file in ./tty/*.log
+
+for file in $1/*.log
 do
 	num=`shuf -i 1-7 -n 1`
 	if [ -z "$numold" ]
